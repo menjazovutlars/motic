@@ -1,1 +1,0 @@
-Dieses EMS ist für die Auflösung 1920x1080px optimiert. Bei anderen Auflösungen wird kein optimales Ergebnis erzeugt werden. Am besten auf Browsern Firefox und Chrome zu sehen. 
