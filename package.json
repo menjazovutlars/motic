@@ -1,0 +1,44 @@
+{
+  "name": "repo.rtf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imd2019/SS21-team4real.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imd2019/SS21-team4real/issues"
+  },
+  "homepage": "https://github.com/imd2019/SS21-team4real#readme",
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  },
+  "dependencies": {
+    "@tensorflow-models/handpose": "^0.0.7",
+    "@tensorflow-models/posenet": "^2.2.2",
+    "@tensorflow/tfjs": "^3.7.0",
+    "@tensorflow/tfjs-backend-cpu": "^3.7.0",
+    "@tensorflow/tfjs-backend-webgl": "^3.7.0",
+    "@tensorflow/tfjs-converter": "^3.7.0",
+    "@tensorflow/tfjs-core": "^3.7.0",
+    "@tensorflow/tfjs-node": "^3.7.0",
+    "animate.css": "^4.1.1",
+    "express": "^4.17.1",
+    "fingerpose": "^0.0.2",
+    "font-awesome-animation": "^1.1.1",
+    "mysql": "^2.18.1",
+    "restify": "^8.5.1",
+    "socket.io": "^4.1.2",
+    "ws": "^7.4.6"
+  }
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="assets/css/all.css">
+
+    <!-- 
+                Project: tfjs https://github.com/tensorflow/tfjs
+                License: https://github.com/tensorflow/tfjs/blob/master/LICENSE
+            -->
+    <script src="https://unpkg.com/@tensorflow/tfjs@3.7.0/dist/tf.min.js"></script>
+    <!-- 
+                Project: Handpose https://github.com/tensorflow/tfjs-models/tree/master/handpose
+                License: https://github.com/tensorflow/tfjs-models/blob/master/LICENSE
+            -->
+    <script src="https://unpkg.com/@tensorflow-models/handpose@0.0.6/dist/handpose.js"></script>
+    <!-- 
+                Project: Posenet https://github.com/tensorflow/tfjs-models/tree/master/posenet
+                License: https://github.com/tensorflow/tfjs-models/blob/master/LICENSE
+            -->
+    <script src="https://unpkg.com/@tensorflow-models/posenet@2.2.2/dist/posenet.min.js"></script>
+    <!-- 
+                Project: Fingerpose https://github.com/andypotato/fingerpose
+                License: https://github.com/andypotato/fingerpose/blob/master/LICENSE
+            -->
+    <script src="fingerpose.js" type="text/javascript"></script>
+    <!-- 
+                Project: SoundJS https://github.com/CreateJS/SoundJS
+                License: https://github.com/CreateJS/SoundJS/blob/master/LICENSE.txt
+            -->
+    <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
+    <!-- 
+                Project: PreloadJS https://github.com/CreateJS/PreloadJS
+                License: https://github.com/CreateJS/PreloadJS/blob/master/LICENSE.txt
+            -->
+    <script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
+
+    <title>EMS Team 4</title>
+</head>
+
+<body>
+
+
+
+    <div class="navbar">
+        <span class="horizontal-line"></span>
+        <span class="horizontal-line"></span>
+        <span class="horizontal-line"></span>
+        <span class="horizontal-line"></span>
+        <span class="horizontal-line"></span>
+        <span class="vertical-line"></span>
+        <h3 id="nav-text"></h3>
+    </div>
+
+    <audio id="myAudio" autoplay muted>
+        <source src="assets/pictures/sound.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="parent">
+        <section class="container1">
+            <img class="img-notes" src="assets/pictures/noten.svg" alt="Notenzeile">
+            <h1>MOTIC</h1>
+            <h3>DIE MUSIK TANZT ZU DIR</h3>
+            <div class="navigation">
+                <i class="fas fa-mouse fa-lg"></i>
+                <div class="line"></div>
+            </div>
+        </section>
+
+        <section class="container2">
+            <video class="metronome" autoplay="autoplay" loop>
+                <source src="assets/pictures/metronome.mp4" type="video/mp4">
+            </video>
+            <div class="text2">
+                <h6>WAS?</h6>
+                <p>Denkblockaden. Jede:r Kreativschaffende kennt und fürchtet sie. Insbesondere wenn man im Beruf auf
+                    seine Kreativität angewiesen ist, kann eine kreative Blockade zum großen Problem werden. Aufträge
+                    stauen sich, Kund:innen müssen warten, der Stresspegel steigt …. Je verkrampfter man dann versucht,
+                    trotz der Denkblockade weiter zu arbeiten, desto schlimmer wird es. Bis man für den Tag verzweifelt
+                    aufgibt. Durch die Covid-19 Pandemie wurde dieses Problem noch verstärkt, denn der Austausch mit
+                    Gleichgesinnten wurde deutlich erschwert.
+                </p>
+            </div>
+        </section>
+
+        <section class="container3">
+            <div class="text3">
+                <h6>PROBLEM?</h6>
+                <p>
+                    Was kann helfen? Das kreative Denken wird von vielen verschiedenen Faktoren beeinflusst,
+                    insbesondere auch durch unsere Stimmung. Unsere Stimmung kann wiederum durch Musik verändert werden.
+                    Recherchen haben ergeben, dass aktives Musizieren insbesondere in Kombination mit Bewegung unsere
+                    Stimmung aktiv so verändern kann, dass das kreative Denken gefördert wird. Hier setzt Motic an.
+                    <br><br>
+                    Viele Menschen würden die Vorteile des Musizierens gerne nutzen, können oder wollen allerdings kein
+                    Instrument lernen. Für diese Menschen bietet Motic eine Möglichkeit, ohne Vorkenntnisse und mit
+                    möglichst wenig Regeln die Vorteile des Musizierens zu entdecken und dabei spielerisch mit anderen
+                    kreativen Menschen zusammen zu arbeiten.
+                </p>
+            </div>
+            <img id="img-sax" src="assets/pictures/saxophone.svg" alt="Saxophon">
+            <img id="img-key" src="assets/pictures/keyboard.svg" alt="Keyboard">
+            <img id="img-cello" src="assets/pictures/cello.svg" alt="Cello">
+            <img id="img-flute" src="assets/pictures/flute.svg" alt="Floete">
+        </section>
+
+        <section class="container4">
+            <div class="motion-capture" id="motion-capture">
+                <video class="bg-video" id="bg-video" loop autoplay muted poster="assets/pictures/poster.jpg"
+                    alt="Video von Protoytp">
+                    <source src="assets/videos/GIF.mp4" type="video/mp4">
+                </video>
+                <video autoplay="true" class="camera-feed" id="camera-feed"></video>
+                <canvas class="canvas" id="cv1" display="none"></canvas>
+                <div class="estimated-gesture" id="estimated-gesture" display="none">
+                    <p>
+                        Keine Geste erkannt.
+                    </p>
+                </div>
+                <img class="mute-switch" id="mute-switch" src="assets/pictures/volume-up-solid.svg" alt="Mute"
+                    onclick="muteSound()"></img>
+            </div>
+
+            <div class="text4" id="text4">
+                <h6>LÖSUNG!</h6>
+                <p>Motic ist ein Medium, welches Handbewegungen erkennt und in Töne umwandelt. Es funktioniert dabei
+                    mit mehr als zwei Händen, damit mehrere Personen über Motic in eine Interaktion miteinander treten
+                    können. Sie müssen sich zusammen bewegen, um eine harmonische Melodie zu erzeugen. Durch Motic
+                    brauchen sie darüber hinaus allerdings keinerlei Kenntnisse im Musizieren zu haben. Weiterhin wird
+                    durch die alleinige Nutzung der Hände ebenfalls gesichert, dass nicht zu viele Regeln erlernt werden
+                    müssen. <br><br>So können zum Beispiel über die Position der Hand unterschiedliche Töne abgespielt werden. Die Gesten Faust, halboffene Handfläche und offene Handfläche bestimmen dabei die Lautstärke des Tons mit der Faust für laut und offene Handfläche für leise.
+                    <br><br>
+                    Motic eröffnet einer breiten Gruppe an Menschen die Vorteile des Musizierens. Durch die
+                    Kombination aus Bewegung und Musik wird das kreative Denken gefördert, Denkblockaden können
+                    aufgelöst und das Gemeinschaftsgefühl zwischen Kreativschaffenden gefördert werden..
+                </p>
+                <p id="try">
+                    Try it yourself!
+                </p>
+                <img class="motion-switch" id="motion-switch" src="assets/pictures/long-arrow-alt-left-solid.svg"></img>
+
+            </div>
+        </section>
+
+        <section class="container5">
+            <div class="text5">
+                <h6>TRAILER</h6>
+            </div>
+            <video width="1280" height="720" controls>
+                <source src="assets/pictures/Trailer.mp4" type="video/mp4">
+            </video>
+        </section>
+
+        <section class="container6">
+            <div class="teamfotos">
+                <img class="img-lars" src="assets/pictures/lars.png" alt="Lars">
+                <img class="img-marina" src="assets/pictures/marina.png" alt="Marina">
+                <img class="img-marie" src="assets/pictures/marie.png" alt="Marie">
+                <img class="img-anka" src="assets/pictures/anka.png" alt="Anka">
+            </div>
+
+            <div class="text6">
+                <h6>TEAM</h6>
+
+                <p>Wir sind team4real.<br><br>
+                    Im vierten Semester des Studiengangs Interactive Media Design der Hochschule Darmstadt ist das
+                    Projekt Motic entstanden. Unser Ziel war es, ein Produkt zu entwickeln, das den Anwendern (und in
+                    der Entwicklung auch uns) Spaß macht. Wie in den letzten zwei Semestern fand die Arbeit am Projekt
+                    wieder fast vollständig präsenzfrei statt.
+
+                    <br><br>
+                    Wir hoffen unser erlebbares Management Summary gefällt euch, euer team4real.
+                </p>
+            </div>
+        </section>
+    </div>
+<script language="javascript">
+    // Get the button, and when the user clicks on it, execute myFunction
+    function myFunction() {
+            document.getElementById('clickSax').classList.toggle('show');
+        }
+
+        document.getElementById('img-sax').onclick = function () { myFunction(); };
+</script>
+    <script language="javascript" src="script.js"></script>
+</body>
+
+</html>
